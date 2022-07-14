@@ -1,5 +1,3 @@
-## urban-growing-detection-wS1
------------------------------------------------------------
 # Detección de crecimiento urbano usando imagenes del satelite Sentinel-1
 
 ## Requerimientos
