@@ -35,6 +35,22 @@ ENV CUDNN_MAJOR_VERSION=8
 RUN apt-key adv --fetch-keys \
     && apt-get -y update
 
+
+# Install Google Cloud SDK
+RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | tee /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-sdk -y
+
+# Install Orfeo Toolbox
+ARG otb_version=8.0.1
+ENV OTB_PACKAGE_NAME=OTB-${otb_version}-Linux64
+RUN wget -q https://www.orfeo-toolbox.org/packages/$OTB_PACKAGE_NAME.run \
+  && chmod +x ./$OTB_PACKAGE_NAME.run \
+  && mv ./$OTB_PACKAGE_NAME.run /opt/ \
+  && cd /opt/ \
+  && /opt/$OTB_PACKAGE_NAME.run \
+  && rm -f /opt/$OTB_PACKAGE_NAME.run \
+  && ln -s /opt/$OTB_PACKAGE_NAME /opt/OTB
+ENV OTBENV_PROFILE_PATH=/opt/OTB/otbenv.profile
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
    curl gdal-bin libgl1 python3 python3-gdal python3-pip
 
