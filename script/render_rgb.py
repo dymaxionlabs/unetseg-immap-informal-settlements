@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-import rasterio
+import os
 from numbers import Number
 from typing import Dict, List, Tuple
 
 import numpy as np
+import rasterio
 
 HexColor = str
 # TODO: Represent ColorMap as a Dict[Number, HexColor]
@@ -37,27 +38,34 @@ CMAPS = {
         (0.8, "#B6E152"),
         (0.9, "#F1E948"),
         (1.0, "#FEE24C"),
-    ]
+    ],
 }
-
 
 
 def create_rgb_raster(
     src: str, dst: str, cmap: ColorMap, metadata: Dict[str, str]
 ) -> None:
     with rasterio.open(src) as src_ds:
-        img = src_ds.read(1)  
+        img = src_ds.read(1)
         profile = src_ds.profile.copy()
-        
+
     img = img.reshape((1, img.shape[0], img.shape[1]))
-        
+
     # min_value, max_value = cmap[0][0], cmap[-1][0]
     # rescaled_img = rescale_to_byte(img, min_value=min_value, max_value=max_value)
     # NOTE: Image is already between 0 and 255
     rescaled_img = img
     rgb_img, _ = apply_cmap(rescaled_img, cmap)
-     
-    profile.update(driver="GTiff", count=3, dtype=np.uint8, compress="deflate", tiled=True, nodata=None)
+
+    profile.update(
+        driver="GTiff",
+        count=3,
+        dtype=np.uint8,
+        compress="deflate",
+        tiled=True,
+        nodata=None,
+    )
+    os.makedirs(os.path.dirname(dst), exist_ok=True)
     with rasterio.open(dst, "w", **profile) as dst_ds:
         for i in range(3):
             dst_ds.write(rgb_img[i, :, :], i + 1)
@@ -148,7 +156,7 @@ def main():
     parser.add_argument("src")
     parser.add_argument("dst")
     parser.add_argument("--cmap", choices=CMAPS.keys(), default="viridis")
-    
+
     args = parser.parse_args()
 
     cmap = CMAPS[args.cmap]
