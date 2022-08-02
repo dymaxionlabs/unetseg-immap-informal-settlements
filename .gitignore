@@ -474,3 +474,5 @@ scripts/todeploy/*
 .env.dev.docker
 *.nbvars
 .nb_tmp/
+
+data/
