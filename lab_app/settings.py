@@ -8,7 +8,7 @@ from labfunctions import defaults
 # stored in that machines.
 
 # Main settings
-PROJECTID = "2o0gieuvqa"
+PROJECTID = "n3lf9gkyia"
 PROJECT_NAME = "immap-informal-settlements"
 # Theese information is used to run workloads in the workers.
 # Don't modify at least you know what you are doing.
