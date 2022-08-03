@@ -27,6 +27,7 @@ flatbuffers==1.12
 fonttools==4.33.3
 frozenlist==1.2.0
 gast==0.3.3
+geopandas
 google-auth==1.33.0
 google-auth-oauthlib==0.4.4
 google-pasta==0.2.0
@@ -60,6 +61,7 @@ opencv-python==4.6.0.66
 opencv-python-headless==4.6.0.66
 opt-einsum==3.3.0
 packaging==21.3
+pandas
 parso==0.8.3
 pexpect==4.8.0
 pickleshare==0.7.5
