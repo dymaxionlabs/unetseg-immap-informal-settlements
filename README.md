@@ -1,5 +1,7 @@
 # Detección de asentamientos informales usando imágenes del satélite Sentinel-1
 
+![](comparison.jpg)
+
 ## Requerimientos
 
 Se utilizan las herramientas **GDAL** y [Orfeo Toolbox](https://www.orfeo-toolbox.org/) en la primera etapa del pre-procesamiento de los datos. Luego, se emplean nuestros paquetes [satproc](https://github.com/dymaxionlabs/satproc) y [unetseg](https://github.com/dymaxionlabs/satproc) para la generación del dataset y modelo de ML respectivamente.
