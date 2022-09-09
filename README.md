@@ -1,4 +1,4 @@
-# Detección de crecimiento urbano usando imagenes del satelite Sentinel-1
+# Detección de asentamientos informales usando imágenes del satélite Sentinel-1
 
 ## Requerimientos
 
